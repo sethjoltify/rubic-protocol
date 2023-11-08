@@ -5,6 +5,7 @@ import { UpdateScriptBase } from "./utils/UpdateScriptBase.sol";
 import { stdJson } from "forge-std/StdJson.sol";
 import { DiamondCutFacet, IDiamondCut } from "rubic/Facets/DiamondCutFacet.sol";
 import { MultichainFacet } from "rubic/Facets/MultichainFacet.sol";
+import "hardhat/console.sol";
 
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
@@ -20,7 +21,7 @@ contract DeployScript is UpdateScriptBase {
         );
         string memory json = vm.readFile(path);
         address facet = json.readAddress(".MultichainFacet");
-
+        
         path = string.concat(root, "/config/multichain.json");
         json = vm.readFile(path);
         address anyNative = json.readAddress(

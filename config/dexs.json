@@ -355,5 +355,9 @@
   ],
   "mumbai": [],
   "optimisticKovan": [],
-  "avalancheFujiTestnet": []
+  "avalancheFujiTestnet": [],
+  "bsc-testnet": [
+    "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+    "0x1b02da8cb0d097eb8d57a175b88c7d8b47997506"
+  ]
 }

@@ -11,6 +11,8 @@ import { DexManagerFacet } from "rubic/Facets/DexManagerFacet.sol";
 import { AccessManagerFacet } from "rubic/Facets/AccessManagerFacet.sol";
 import { FeesFacet } from "rubic/Facets/FeesFacet.sol";
 
+import "hardhat/console.sol";
+
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
 
@@ -89,17 +91,6 @@ contract DeployScript is UpdateScriptBase {
             })
         );
 
-        //        bytes4[] memory toExclude = new bytes4[](9);
-        //        toExclude[0] = (bytes4(hex'07598f62'));
-        //        toExclude[1] = (bytes4(hex'162dfb0d'));
-        //        toExclude[2] = (bytes4(hex'8ac2e981'));
-        //        toExclude[3] = (bytes4(hex'1135acdb'));
-        //        toExclude[4] = (bytes4(hex'bf01fb1c'));
-        //        toExclude[5] = (bytes4(hex'6d0f18c4'));
-        //        toExclude[6] = (bytes4(hex'825dc415'));
-        //        toExclude[7] = (bytes4(hex'bcd97c25'));
-        //        toExclude[8] = (bytes4(hex'95c54f5a'));
-
         // Fees Facet
         cut.push(
             IDiamondCut.FacetCut({
@@ -124,6 +115,8 @@ contract DeployScript is UpdateScriptBase {
             string.concat(".config", ".maxRubicTokenFee")
         );
 
+        console.logBytes('selector:', FeesFacet.initialize.selector);
+
         bytes memory initCallData = abi.encodeWithSelector(
             FeesFacet.initialize.selector,
             feeTreasury,
@@ -132,8 +125,11 @@ contract DeployScript is UpdateScriptBase {
         );
 
         cutter.diamondCut(cut, fees, initCallData);
+        console.logBytes(initCallData);
 
         facets = loupe.facetAddresses();
+
+        // console.log("facets addresses:", facets);
 
         vm.stopBroadcast();
     }

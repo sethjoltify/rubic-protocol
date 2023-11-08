@@ -938,5 +938,14 @@
       "0xd51194aa5c2e162371682cb43ed637bca632fac8",
       "0xff7104537f33937c66ac0a65609eb8364be75c7a"
     ]
+  },
+  "mumbai": {
+    "chainID": 80001,
+    "anyNative": "0x7bcd44c0b91be28827426f607424e1a8a02d4e69",
+    "routers": [
+      "0xa7260a951F56BDfDA6E59B7EAe8265B1Cd467AF4",
+      "0xd51194aa5c2e162371682cb43ed637bca632fac8",
+      "0xff7104537f33937c66ac0a65609eb8364be75c7a"
+    ]
   }
 }

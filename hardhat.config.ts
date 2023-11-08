@@ -99,8 +99,8 @@ const config: HardhatUserConfig = {
       accounts: [`0x${DEFAULT_PRIVATE_KEY}`],
     },
     bscTestnet: {
-      url: `${process.env.ETH_NODE_URI_BSCTEST}`,
-      ethNetwork: 'bsc',
+      url: `${process.env.ETH_NODE_URI_BSC_TESTNET}`,
+      ethNetwork: 'bsc-testnet',
       zksync:false,
       accounts: [`0x${DEFAULT_PRIVATE_KEY}`],
 
