@@ -18,7 +18,7 @@ update() {
   echo $RAW_RETURN_DATA
 	CLEAN_RETURN_DATA=$(echo $RAW_RETURN_DATA | sed 's/^.*{\"logs/{\"logs/')
 	RETURN_DATA=$(echo $CLEAN_RETURN_DATA | jq -r '.returns' 2> /dev/null)
-  #echo $RETURN_DATA
+#   echo $RETURN_DATA
 	echo $CLEAN_RETURN_DATA | jq 2> /dev/null
 
 	facets=$(echo $RETURN_DATA | jq -r '.facets.value')

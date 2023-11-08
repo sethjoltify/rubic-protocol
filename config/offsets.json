@@ -2461,5 +2461,47 @@
       "offset": 0,
       "isAvailable": true
     }
+  ],
+  "mumbai":[
+    {
+      "router": "0xcE8f24A58D85eD5c5A6824f7be1F8d4711A0eb4C",
+      "selector": "0xa11b1198",
+      "offset": 0,
+      "isAvailable": true
+    },
+    {
+      "router": "0x778C974568e376146dbC64fF12aD55B2d1c4133f",
+      "selector": "0x2aac3cac",
+      "offset": 0,
+      "isAvailable": true
+    }
+  ],
+  "goerli":[
+    {
+      "router": "0xcE8f24A58D85eD5c5A6824f7be1F8d4711A0eb4C",
+      "selector": "0xa11b1198",
+      "offset": 0,
+      "isAvailable": true
+    },
+    {
+      "router": "0xeF4fB24aD0916217251F553c0596F8Edc630EB66",
+      "selector": "0x2aac3cac",
+      "offset": 0,
+      "isAvailable": true
+    }
+  ],
+  "bsc-testnet":[
+    {
+      "router": "0x778C974568e376146dbC64fF12aD55B2d1c4133f",
+      "selector": "0x2aac3cac",
+      "offset": 0,
+      "isAvailable": true
+    },
+    {
+      "router": "0xA738e84fdE890Bc60b99AF7ccE43990E534304de",
+      "selector": "0xa11b1198",
+      "offset": 0,
+      "isAvailable": true
+    }
   ]
 }

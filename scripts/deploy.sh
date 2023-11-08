@@ -62,11 +62,15 @@ verifyContract() {
 	CONTRACT=$2
 	ADDRESS=$3
 	ARGS=$4
-	API_KEY="$(tr '[:lower:]' '[:upper:]' <<< $NETWORK)_ETHERSCAN_API_KEY"
 
 	if [ "$NETWORK" = "zkEvm" ]; then
 	  NETWORK=polygon-zkevm
-  fi
+  	fi
+	if [ "$NETWORK" = "bsc-testnet" ]; then
+	  API_KEY="BSC_TESTNET_ETHERSCAN_API_KEY"
+	else
+      API_KEY="$(tr '[:lower:]' '[:upper:]' <<< $NETWORK)_ETHERSCAN_API_KEY"
+  	fi
 
 	if [ "$ARGS" = "0x" ]; then
 		forge verify-contract --watch --chain $NETWORK --etherscan-api-key "${!API_KEY}"  $ADDRESS $CONTRACT

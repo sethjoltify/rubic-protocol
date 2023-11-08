@@ -4448,5 +4448,9 @@
   "zkSync": {
     "chainID": 324,
     "mappings": []
+  },
+  "mumbai": {
+    "chainID": 80001,
+    "mappings": []
   }
 }

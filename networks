@@ -18,5 +18,7 @@ zkEvm
 mantle
 scroll
 zkSyncTestnet
+sepolia
 mumbai
-bscTestnet
+goerli
+bsc-testnet
