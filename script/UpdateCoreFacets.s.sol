@@ -11,8 +11,6 @@ import { DexManagerFacet } from "rubic/Facets/DexManagerFacet.sol";
 import { AccessManagerFacet } from "rubic/Facets/AccessManagerFacet.sol";
 import { FeesFacet } from "rubic/Facets/FeesFacet.sol";
 
-import "hardhat/console.sol";
-
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
 
@@ -115,8 +113,6 @@ contract DeployScript is UpdateScriptBase {
             string.concat(".config", ".maxRubicTokenFee")
         );
 
-        console.logBytes('selector:', FeesFacet.initialize.selector);
-
         bytes memory initCallData = abi.encodeWithSelector(
             FeesFacet.initialize.selector,
             feeTreasury,
@@ -125,7 +121,6 @@ contract DeployScript is UpdateScriptBase {
         );
 
         cutter.diamondCut(cut, fees, initCallData);
-        console.logBytes(initCallData);
 
         facets = loupe.facetAddresses();
 
