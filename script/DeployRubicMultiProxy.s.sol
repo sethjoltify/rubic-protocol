@@ -48,7 +48,6 @@ contract DeployScript is DeployScriptBase {
         } else {
             deployed = new RubicMultiProxy(deployerAddress, diamondCut);
         }
-
         vm.stopBroadcast();
     }
 }

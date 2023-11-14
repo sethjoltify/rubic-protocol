@@ -21,19 +21,23 @@ RECEIVER=$(jq -r '.Receiver // "0x"' $ADDRS)
 FEECOLLECTOR=$(jq -r '.FeeCollector // "0x"' $ADDRS)
 RELAYERCBRIDGE=$(jq -r '.RelayerCBridge // "0x"' $ADDRS)
 
+echo "FILE_SUFFIX: $FILE_SUFFIX"
 echo "Diamond: $DIAMOND"
+echo "Receiver: $RECEVIER"
+echo "Executor: $EXECUTOR"
+echo "ERC20: $ERC20PROXY"
 
-if [[ "$ERC20PROXY" != "0x"  && " ${CONTRACTS[*]} " =~ "erc20Proxy" ]]; then
+if [[ "$ERC20PROXY" != "0x"  && "${CONTRACTS[*]} " =~ "erc20Proxy" ]]; then
   echo "Updating ERC20Proxy $ERC20PROXY"
   register $NETWORK $DIAMOND 'ERC20Proxy' $ERC20PROXY
 fi
 
-if [[ "$AXELAREXECUTOR" != "0x" && " ${CONTRACTS[*]}" =~ "axelarExecutor" ]]; then
+if [[ "$AXELAREXECUTOR" != "0x" && "${CONTRACTS[*]}" =~ "axelarExecutor" ]]; then
   echo "Updating AxelarExecutor $AXELAREXECUTOR"
   register $NETWORK $DIAMOND 'AxelarExecutor' $AXELAREXECUTOR
 fi
 
-if [[ "$EXECUTOR" != "0x" && " ${CONTRACTS[*]}" =~ "executor" ]]; then
+if [[ "$EXECUTOR" != "0x" && "${CONTRACTS[*]}" =~ "executor" ]]; then
   echo "Updating Executor $EXECUTOR"
   register $NETWORK $DIAMOND 'Executor' $EXECUTOR
 fi
@@ -60,7 +64,9 @@ register() {
   NAME=$3
   ADDR=$4
   RPC="ETH_NODE_URI_$NETWORK"
-
+ if [ "$NETWORK" = "BSC-TESTNET" ]; then
+    RPC="ETH_NODE_URI_BSC_TESTNET"
+  fi
   cast send $DIAMOND 'registerPeripheryContract(string,address)' "$NAME" "$ADDR" --private-key $PRIVATE_KEY --rpc-url "${!RPC}" --legacy
 }
 

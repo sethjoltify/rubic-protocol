@@ -6,8 +6,6 @@ import { stdJson } from "forge-std/StdJson.sol";
 import { DiamondCutFacet, IDiamondCut } from "rubic/Facets/DiamondCutFacet.sol";
 import { GenericCrossChainFacet } from "rubic/Facets/GenericCrossChainFacet.sol";
 
-import "hardhat/console.sol";
-
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
 
@@ -25,7 +23,6 @@ contract DeployScript is UpdateScriptBase {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        console.log("1 ------");
 
         // GenericSwap
         if (loupe.facetFunctionSelectors(facet).length == 0) {
@@ -41,7 +38,6 @@ contract DeployScript is UpdateScriptBase {
                 })
             );
             cutter.diamondCut(cut, address(0), "");
-            console.log("2 -------");
         }
 
         facets = loupe.facetAddresses();

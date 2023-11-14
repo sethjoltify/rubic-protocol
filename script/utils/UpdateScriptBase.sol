@@ -21,6 +21,7 @@ contract UpdateScriptBase is Script {
 
     constructor() {
         deployerPrivateKey = uint256(vm.envBytes32("PRIVATE_KEY"));
+        
         root = vm.projectRoot();
         network = vm.envString("NETWORK");
         fileSuffix = vm.envString("FILE_SUFFIX");
@@ -43,16 +44,49 @@ contract UpdateScriptBase is Script {
         string memory _facetName,
         bytes4[] memory _exclude
     ) internal returns (bytes4[] memory selectors) {
-        string[] memory cmd = new string[](3);
-        cmd[0] = "scripts/contract-selectors.sh";
-        cmd[1] = _facetName;
-        string memory exclude;
-        for (uint256 i; i < _exclude.length; i++) {
-            exclude = string.concat(exclude, fromCode(_exclude[i]), " ");
-        }
-        cmd[2] = exclude;
+        string[] memory cmd = new string[](2);
+        // cmd[0] = "../../scripts/contract-selectors.sh";
+        // cmd[1] = _facetName;
+        // string memory exclude;
+        // for (uint256 i; i < _exclude.length; i++) {
+        //     exclude = string.concat(exclude, fromCode(_exclude[i]), " ");
+        // }
+        // // cmd[2] = exclude;
+        // console.log("res");
+        // console.log("vm:", address(vm));
+        // console.log("Incre0");
+
+        // string[] memory inputs = new string[](3);
+        // inputs[0] = "echo";
+        // inputs[1] = "-n";
+        // // ABI encoded "gm", as a hex string
+        // inputs[2] = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002676d000000000000000000000000000000000000000000000000000000000000";
+
+        // bytes memory res1 = vm.ffi(inputs);
+        // string memory output = abi.decode(res1, (string));
+        // console.log(output);
+
+
+        // string memory path111 = string.concat(
+        //     vm.projectRoot(),
+        //     "/scripts/contract-selectors.sh"
+        // );
+        // console.log("Path : ", path111);
+        // cmd[0] = path111;
+        cmd[0] = "D:/Dev/Work/Rubic/multi-proxy-rubic/scripts/selector.sh";
+        cmd[1] = "";
+        console.log("cmd[0] : ", cmd[0]);
+        console.log("cmd[1] : ", cmd[1]);
+        // console.log("cmd[2] : ", cmd[2]);
+
         bytes memory res = vm.ffi(cmd);
-        selectors = abi.decode(res, (bytes4[]));
+        console.log("Incre");
+        console.logBytes(res);
+        console.log("Incre1");
+        // selectors = abi.decode(res, (bytes4[]));
+        console.log("Incre2");
+        // console.logBytes4(selectors[0]);
+        console.log("Incre3");
     }
 
     function toHexDigit(uint8 d) internal pure returns (bytes1) {
