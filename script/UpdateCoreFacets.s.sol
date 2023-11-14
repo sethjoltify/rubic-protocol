@@ -27,52 +27,47 @@ contract DeployScript is UpdateScriptBase {
         );
         string memory json = vm.readFile(path);
         address diamondLoupe = json.readAddress(".DiamondLoupeFacet");
-        address ownership = json.readAddress(".OwnershipFacet");
-        address withdraw = json.readAddress(".WithdrawFacet");
+        // address ownership = json.readAddress(".OwnershipFacet");
+        // address withdraw = json.readAddress(".WithdrawFacet");
         address dexMgr = json.readAddress(".DexManagerFacet");
-        address accessMgr = json.readAddress(".AccessManagerFacet");
-        address fees = json.readAddress(".FeesFacet");
-
-        console.log("network", network);
-        console.log("fileSuffix", fileSuffix); 
+        // address accessMgr = json.readAddress(".AccessManagerFacet");
+        // address fees = json.readAddress(".FeesFacet");
+ 
         vm.startBroadcast(deployerPrivateKey);
 
         bytes4[] memory emptyExclude;
 
-        console.log("1");
-
         // Diamond Loupe
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(diamondLoupe),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors(
-                    "DiamondLoupeFacet",
-                    emptyExclude
-                )
-            })
-        );
-        console.log("2");
+        // cut.push(
+        //     IDiamondCut.FacetCut({
+        //         facetAddress: address(diamondLoupe),
+        //         action: IDiamondCut.FacetCutAction.Add,
+        //         functionSelectors: getSelectors(
+        //             "DiamondLoupeFacet",
+        //             emptyExclude
+        //         )
+        //     })
+        // );
 
-        // Ownership Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(ownership),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("OwnershipFacet", emptyExclude)
-            })
-        );
-        console.log("3");
+        // // Ownership Facet
+        // cut.push(
+        //     IDiamondCut.FacetCut({
+        //         facetAddress: address(ownership),
+        //         action: IDiamondCut.FacetCutAction.Add,
+        //         functionSelectors: getSelectors("OwnershipFacet", emptyExclude)
+        //     })
+        // );
+        // console.log("3");
 
-        // Withdraw Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: withdraw,
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("WithdrawFacet", emptyExclude)
-            })
-        );
-        console.log("4");
+        // // Withdraw Facet
+        // cut.push(
+        //     IDiamondCut.FacetCut({
+        //         facetAddress: withdraw,
+        //         action: IDiamondCut.FacetCutAction.Add,
+        //         functionSelectors: getSelectors("WithdrawFacet", emptyExclude)
+        //     })
+        // );
+        // console.log("4");
 
         // Dex Manager Facet
         cut.push(
@@ -87,57 +82,57 @@ contract DeployScript is UpdateScriptBase {
         );
         console.log("5");
 
-        // Access Manager Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: accessMgr,
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors(
-                    "AccessManagerFacet",
-                    emptyExclude
-                )
-            })
-        );
-        console.log("6");
+        // // Access Manager Facet
+        // cut.push(
+        //     IDiamondCut.FacetCut({
+        //         facetAddress: accessMgr,
+        //         action: IDiamondCut.FacetCutAction.Add,
+        //         functionSelectors: getSelectors(
+        //             "AccessManagerFacet",
+        //             emptyExclude
+        //         )
+        //     })
+        // );
+        // console.log("6");
 
-        // Fees Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: fees,
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("FeesFacet", emptyExclude)
-            })
-        );
-        console.log("7");
+        // // Fees Facet
+        // cut.push(
+        //     IDiamondCut.FacetCut({
+        //         facetAddress: fees,
+        //         action: IDiamondCut.FacetCutAction.Add,
+        //         functionSelectors: getSelectors("FeesFacet", emptyExclude)
+        //     })
+        // );
+        // console.log("7");
 
-        string memory feesConfigPath = string.concat(
-            vm.projectRoot(),
-            "/config/fees.json"
-        );
-        string memory feesConfigJson = vm.readFile(feesConfigPath);
-        address feeTreasury = feesConfigJson.readAddress(
-            string.concat(".config.", "feeTreasury.", network)
-        );
-        uint256 maxFixedNativeFee = feesConfigJson.readUint(
-            string.concat(".config.", network, ".maxFixedNativeFee")
-        );
-        uint256 maxRubicTokenFee = feesConfigJson.readUint(
-            string.concat(".config", ".maxRubicTokenFee")
-        );
+        // string memory feesConfigPath = string.concat(
+        //     vm.projectRoot(),
+        //     "/config/fees.json"
+        // );
+        // string memory feesConfigJson = vm.readFile(feesConfigPath);
+        // address feeTreasury = feesConfigJson.readAddress(
+        //     string.concat(".config.", "feeTreasury.", network)
+        // );
+        // uint256 maxFixedNativeFee = feesConfigJson.readUint(
+        //     string.concat(".config.", network, ".maxFixedNativeFee")
+        // );
+        // uint256 maxRubicTokenFee = feesConfigJson.readUint(
+        //     string.concat(".config", ".maxRubicTokenFee")
+        // );
 
-        console.log("feeTreasury:", feeTreasury);
-        console.log("maxTokenFee:", maxRubicTokenFee);
-        console.logBytes4(FeesFacet.initialize.selector);
+        // console.log("feeTreasury:", feeTreasury);
+        // console.log("maxTokenFee:", maxRubicTokenFee);
+        // console.logBytes4(FeesFacet.initialize.selector);
 
-        bytes memory initCallData = abi.encodeWithSelector(
-            FeesFacet.initialize.selector,
-            feeTreasury,
-            maxRubicTokenFee,
-            maxFixedNativeFee
-        );
+        // bytes memory initCallData = abi.encodeWithSelector(
+        //     FeesFacet.initialize.selector,
+        //     feeTreasury,
+        //     maxRubicTokenFee,
+        //     maxFixedNativeFee
+        // );
 
-        cutter.diamondCut(cut, fees, initCallData);
-
+        // cutter.diamondCut(cut, fees, initCallData);
+        cutter.diamondCut(cut, address(0), "");
         facets = loupe.facetAddresses();
 
         vm.stopBroadcast();

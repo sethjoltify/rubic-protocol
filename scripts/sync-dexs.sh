@@ -16,8 +16,9 @@ DIAMOND=$(jq -r '.RubicMultiProxy' "./deployments/${NETWORK}.${FILE_SUFFIX}json"
 CFG_DEXS=($(jq --arg n "$NETWORK" -r '.[$n] | @sh' "./config/dexs.json" | tr -d \' | tr '[:upper:]' '[:lower:]'))
 
 RPC="ETH_NODE_URI_$(tr '[:lower:]' '[:upper:]' <<< "$NETWORK")"
-
+echo "1"
 RESULT=$(cast call "$DIAMOND" "approvedDexs() returns (address[])" --rpc-url "${!RPC}")
+echo "3"
 DEXS=($(echo ${RESULT:1:-1} | tr ',' '\n' | tr '[:upper:]' '[:lower:]'))
 
 NEW_DEXS=()
