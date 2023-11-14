@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "module": "commonjs",
     "strict": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -17,5 +18,8 @@
     "./test",
     "typechain/**/*",
     "config"
-  ]
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

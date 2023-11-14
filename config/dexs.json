@@ -353,7 +353,9 @@
   "scroll": [
     "0x80e38291e06339d10AAB483C65695D004dBD5C69"
   ],
-  "mumbai": [],
+  "mumbai": [
+    "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+  ],
   "optimisticKovan": [],
   "avalancheFujiTestnet": [],
   "bsc-testnet": [

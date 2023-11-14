@@ -9,7 +9,8 @@ load() {
 	fi
 
 NETWORK=$(cat ./networks | gum filter --placeholder "Network")
-CONTRACTS=$(gum choose --no-limit erc20Proxy axelarExecutor executor receiver feeCollector relayerCBridge)
+# CONTRACTS=$(gum choose --no-limit erc20Proxy axelarExecutor executor receiver feeCollector relayerCBridge)
+CONTRACTS=$(cat ./periphery | gum filter --placeholder "periphery")
 
 ADDRS="deployments/$NETWORK$FILE_SUFFIX.json"
 
@@ -20,12 +21,6 @@ EXECUTOR=$(jq -r '.Executor // "0x"' $ADDRS)
 RECEIVER=$(jq -r '.Receiver // "0x"' $ADDRS)
 FEECOLLECTOR=$(jq -r '.FeeCollector // "0x"' $ADDRS)
 RELAYERCBRIDGE=$(jq -r '.RelayerCBridge // "0x"' $ADDRS)
-
-echo "FILE_SUFFIX: $FILE_SUFFIX"
-echo "Diamond: $DIAMOND"
-echo "Receiver: $RECEVIER"
-echo "Executor: $EXECUTOR"
-echo "ERC20: $ERC20PROXY"
 
 if [[ "$ERC20PROXY" != "0x"  && "${CONTRACTS[*]} " =~ "erc20Proxy" ]]; then
   echo "Updating ERC20Proxy $ERC20PROXY"
