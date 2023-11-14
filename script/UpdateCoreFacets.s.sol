@@ -11,6 +11,8 @@ import { DexManagerFacet } from "rubic/Facets/DexManagerFacet.sol";
 import { AccessManagerFacet } from "rubic/Facets/AccessManagerFacet.sol";
 import { FeesFacet } from "rubic/Facets/FeesFacet.sol";
 
+import "hardhat/console.sol";
+
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
 
@@ -31,9 +33,13 @@ contract DeployScript is UpdateScriptBase {
         address accessMgr = json.readAddress(".AccessManagerFacet");
         address fees = json.readAddress(".FeesFacet");
 
+        console.log("network", network);
+        console.log("fileSuffix", fileSuffix); 
         vm.startBroadcast(deployerPrivateKey);
 
         bytes4[] memory emptyExclude;
+
+        console.log("1");
 
         // Diamond Loupe
         cut.push(
@@ -46,6 +52,7 @@ contract DeployScript is UpdateScriptBase {
                 )
             })
         );
+        console.log("2");
 
         // Ownership Facet
         cut.push(
@@ -55,6 +62,7 @@ contract DeployScript is UpdateScriptBase {
                 functionSelectors: getSelectors("OwnershipFacet", emptyExclude)
             })
         );
+        console.log("3");
 
         // Withdraw Facet
         cut.push(
@@ -64,6 +72,7 @@ contract DeployScript is UpdateScriptBase {
                 functionSelectors: getSelectors("WithdrawFacet", emptyExclude)
             })
         );
+        console.log("4");
 
         // Dex Manager Facet
         cut.push(
@@ -76,6 +85,7 @@ contract DeployScript is UpdateScriptBase {
                 )
             })
         );
+        console.log("5");
 
         // Access Manager Facet
         cut.push(
@@ -88,6 +98,7 @@ contract DeployScript is UpdateScriptBase {
                 )
             })
         );
+        console.log("6");
 
         // Fees Facet
         cut.push(
@@ -97,6 +108,7 @@ contract DeployScript is UpdateScriptBase {
                 functionSelectors: getSelectors("FeesFacet", emptyExclude)
             })
         );
+        console.log("7");
 
         string memory feesConfigPath = string.concat(
             vm.projectRoot(),
@@ -113,6 +125,10 @@ contract DeployScript is UpdateScriptBase {
             string.concat(".config", ".maxRubicTokenFee")
         );
 
+        console.log("feeTreasury:", feeTreasury);
+        console.log("maxTokenFee:", maxRubicTokenFee);
+        console.logBytes4(FeesFacet.initialize.selector);
+
         bytes memory initCallData = abi.encodeWithSelector(
             FeesFacet.initialize.selector,
             feeTreasury,
@@ -123,8 +139,6 @@ contract DeployScript is UpdateScriptBase {
         cutter.diamondCut(cut, fees, initCallData);
 
         facets = loupe.facetAddresses();
-
-        // console.log("facets addresses:", facets);
 
         vm.stopBroadcast();
     }

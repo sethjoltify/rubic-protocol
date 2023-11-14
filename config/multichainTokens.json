@@ -4452,5 +4452,13 @@
   "mumbai": {
     "chainID": 80001,
     "mappings": []
+  },
+  "goerli": {
+    "chainID": 5,
+    "mappings": []
+  },
+  "bsc-testnet": {
+    "chainID":97,
+    "mappings": []
   }
 }

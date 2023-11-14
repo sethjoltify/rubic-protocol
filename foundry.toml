@@ -3,8 +3,8 @@ test = 'test/solidity'
 solc_version = '0.8.17'
 optimizer = true
 optimizer_runs = 10000
-sender = '0x00a329c0648769a73afac7f9381e08fb43dbea73'
-tx_origin = '0x00a329c0648769a73afac7f9381e08fb43dbea73'
+sender = '0x3bB0DFA27FbaB99b29757f49D9cd9FD480d7A8C0'
+tx_origin = '0x3bB0DFA27FbaB99b29757f49D9cd9FD480d7A8C0'
 out = 'out'
 fs_permissions = [
   { access = "read", path = "./deployments/" },
@@ -82,3 +82,4 @@ scroll = {key = "${SCROLL_ETHERSCAN_API_KEY}", url = "https://blockscout.scroll.
 goerli = { key = "${MAINNET_ETHERSCAN_API_KEY}" }
 mumbai = { key = "${MUMBAI_ETHERSCAN_API_KEY}", url = "https://api-testnet.polygonscan.com/api" }
 sepolia = { key = "${MAINNET_ETHERSCAN_API_KEY}" }
+bsc-testnet = { key = "${BSC_ETHERSCAN_API_KEY}", url = "https://api-testnet.bscscan.com/api" }

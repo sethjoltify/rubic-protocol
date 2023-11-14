@@ -43,8 +43,6 @@ contract RubicMultiProxy {
         }
 
         // get facet from function selector
-        console.log("RubicMultiProxy");
-        console.logBytes4(msg.sig);
         address facet = ds.selectorToFacetAndPosition[msg.sig].facetAddress;
 
         if (facet == address(0)) {

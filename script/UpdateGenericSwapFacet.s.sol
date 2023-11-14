@@ -6,6 +6,8 @@ import { stdJson } from "forge-std/StdJson.sol";
 import { DiamondCutFacet, IDiamondCut } from "rubic/Facets/DiamondCutFacet.sol";
 import { GenericSwapFacet } from "rubic/Facets/GenericSwapFacet.sol";
 
+import "hardhat/console.sol";
+
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
 
@@ -22,6 +24,9 @@ contract DeployScript is UpdateScriptBase {
         address facet = json.readAddress(".GenericSwapFacet");
 
         vm.startBroadcast(deployerPrivateKey);
+
+        console.log("cutaddress:", address(cutter));
+        console.log(loupe.facetFunctionSelectors(facet).length);
 
         // GenericSwap
         if (loupe.facetFunctionSelectors(facet).length == 0) {
