@@ -52,10 +52,8 @@ contract UpdateScriptBase is Script {
             exclude = string.concat(exclude, fromCode(_exclude[i]), " ");
         }
         // cmd[2] = exclude;
-        console.log("res");
 
         bytes memory res = vm.ffi(cmd);
-        console.logBytes(res);
         selectors = abi.decode(res, (bytes4[]));
     }
 
