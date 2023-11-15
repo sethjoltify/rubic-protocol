@@ -32,24 +32,27 @@ contract DeployScript is UpdateScriptBase {
         address dexMgr = json.readAddress(".DexManagerFacet");
         // address accessMgr = json.readAddress(".AccessManagerFacet");
         // address fees = json.readAddress(".FeesFacet");
- 
+
         vm.startBroadcast(deployerPrivateKey);
 
         bytes4[] memory emptyExclude;
 
-        // Diamond Loupe
-        // cut.push(
-        //     IDiamondCut.FacetCut({
-        //         facetAddress: address(diamondLoupe),
-        //         action: IDiamondCut.FacetCutAction.Add,
-        //         functionSelectors: getSelectors(
-        //             "DiamondLoupeFacet",
-        //             emptyExclude
-        //         )
-        //     })
-        // );
+        console.log("1");
 
-        // // Ownership Facet
+        // Diamond Loupe
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(diamondLoupe),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors(
+                    "DiamondLoupeFacet",
+                    emptyExclude
+                )
+            })
+        );
+        console.log("2");
+
+        // Ownership Facet
         // cut.push(
         //     IDiamondCut.FacetCut({
         //         facetAddress: address(ownership),
@@ -59,7 +62,7 @@ contract DeployScript is UpdateScriptBase {
         // );
         // console.log("3");
 
-        // // Withdraw Facet
+        // Withdraw Facet
         // cut.push(
         //     IDiamondCut.FacetCut({
         //         facetAddress: withdraw,
@@ -72,7 +75,7 @@ contract DeployScript is UpdateScriptBase {
         // Dex Manager Facet
         cut.push(
             IDiamondCut.FacetCut({
-                facetAddress: dexMgr,
+                facetAddress: address(dexMgr),
                 action: IDiamondCut.FacetCutAction.Add,
                 functionSelectors: getSelectors(
                     "DexManagerFacet",
@@ -82,7 +85,7 @@ contract DeployScript is UpdateScriptBase {
         );
         console.log("5");
 
-        // // Access Manager Facet
+        // Access Manager Facet
         // cut.push(
         //     IDiamondCut.FacetCut({
         //         facetAddress: accessMgr,
@@ -95,11 +98,11 @@ contract DeployScript is UpdateScriptBase {
         // );
         // console.log("6");
 
-        // // Fees Facet
+        // Fees Facet
         // cut.push(
         //     IDiamondCut.FacetCut({
-        //         facetAddress: fees,
-        //         action: IDiamondCut.FacetCutAction.Add,
+        //         facetAddress: address(0),
+        //         action: IDiamondCut.FacetCutAction.Remove,
         //         functionSelectors: getSelectors("FeesFacet", emptyExclude)
         //     })
         // );
