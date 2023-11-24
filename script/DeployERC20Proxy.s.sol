@@ -27,7 +27,7 @@ contract DeployScript is DeployScriptBase {
 
         constructorArgs = abi.encode(deployerAddress, diamond);
 
-        if (keccak256(abi.encodePacked(fileSuffix)) == keccak256("staging.")) {
+        // if (keccak256(abi.encodePacked(fileSuffix)) == keccak256("staging.")) {
             vm.startBroadcast(deployerPrivateKey);
 
             if (isDeployed()) {
@@ -47,16 +47,16 @@ contract DeployScript is DeployScriptBase {
             );
 
             vm.stopBroadcast();
-        } else {
-            deployerPrivateKey = uint256(
-                vm.envBytes32("PRIVATE_KEY_ERC20PROXY")
-            );
+        // } else {
+        //     deployerPrivateKey = uint256(
+        //         vm.envBytes32("PRIVATE_KEY_ERC20PROXY")
+        //     );
 
-            vm.startBroadcast(deployerPrivateKey);
+        //     vm.startBroadcast(deployerPrivateKey);
 
-            deployed = new ERC20Proxy(deployerAddress, diamond);
+        //     deployed = new ERC20Proxy(deployerAddress, diamond);
 
-            vm.stopBroadcast();
-        }
+        //     vm.stopBroadcast();
+        // }
     }
 }
