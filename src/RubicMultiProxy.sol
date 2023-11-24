@@ -8,8 +8,6 @@ import { LibUtil } from "./Libraries/LibUtil.sol";
 import { LibAsset } from "./Libraries/LibAsset.sol";
 import { ZeroAddress } from "./Errors/GenericErrors.sol";
 
-import "hardhat/console.sol";
-
 contract RubicMultiProxy {
     constructor(address _contractOwner, address _diamondCutFacet) payable {
         if (_contractOwner == address(0)) {
@@ -44,6 +42,7 @@ contract RubicMultiProxy {
 
         // get facet from function selector
         address facet = ds.selectorToFacetAndPosition[msg.sig].facetAddress;
+
 
         if (facet == address(0)) {
             revert LibDiamond.FunctionDoesNotExist();

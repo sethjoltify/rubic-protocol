@@ -98,12 +98,17 @@ const config: HardhatUserConfig = {
       zksync: false,
       accounts: [`0x${DEFAULT_PRIVATE_KEY}`],
     },
-    bscTestnet: {
-      url: `${process.env.ETH_NODE_URI_BSC_TESTNET}`,
-      ethNetwork: 'bsc-testnet',
+    bsc: {
+      url: `${process.env.ETH_NODE_URI_BSC}`,
+      ethNetwork: 'bsc',
       zksync:false,
       accounts: [`0x${DEFAULT_PRIVATE_KEY}`],
-
+    },
+    polygon: {
+      url: `${process.env.ETH_NODE_URI_POLYGON}`,
+      ethNetwork: 'polygon',
+      zksync:false,
+      accounts: [`0x${DEFAULT_PRIVATE_KEY}`],
     }
   },
   defaultNetwork: 'ethereum',
