@@ -9,9 +9,6 @@ import { OwnershipFacet } from "rubic/Facets/OwnershipFacet.sol";
 import { WithdrawFacet } from "rubic/Facets/WithdrawFacet.sol";
 import { DexManagerFacet } from "rubic/Facets/DexManagerFacet.sol";
 import { AccessManagerFacet } from "rubic/Facets/AccessManagerFacet.sol";
-import { FeesFacet } from "rubic/Facets/FeesFacet.sol";
-
-import "hardhat/console.sol";
 
 contract DeployScript is UpdateScriptBase {
     using stdJson for string;
@@ -106,7 +103,7 @@ contract DeployScript is UpdateScriptBase {
                 action: IDiamondCut.FacetCutAction.Add,
                 functionSelectors: getSelectors(
                     "GenericCrossChainFacet",
-                    exclude
+                    emptyExclude
                 )
             })
         );
@@ -118,7 +115,7 @@ contract DeployScript is UpdateScriptBase {
                 action: IDiamondCut.FacetCutAction.Add,
                 functionSelectors: getSelectors(
                     "GenericSwapFacet",
-                    exclude
+                    emptyExclude
                 )
             })
         );
@@ -128,7 +125,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(peripheryRegistry),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("PeripheryRegistryFacet", exclude)
+                functionSelectors: getSelectors("PeripheryRegistryFacet", emptyExclude)
             })
         );
 
@@ -137,7 +134,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(transfer),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("TransferFacet", exclude)
+                functionSelectors: getSelectors("TransferFacet", emptyExclude)
             })
         );
 
@@ -146,7 +143,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(xy),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("XYFacet", exclude)
+                functionSelectors: getSelectors("XYFacet", emptyExclude)
             })
         );
 
@@ -155,7 +152,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(symbiosis),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("SymbiosisFacet", exclude)
+                functionSelectors: getSelectors("SymbiosisFacet", emptyExclude)
             })
         );
 
@@ -164,7 +161,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(stargate),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("StargateFacet", exclude)
+                functionSelectors: getSelectors("StargateFacet", emptyExclude)
             })
         );
 
@@ -173,7 +170,7 @@ contract DeployScript is UpdateScriptBase {
             IDiamondCut.FacetCut({
                 facetAddress: address(multichain),
                 action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("MultichainFacet", exclude)
+                functionSelectors: getSelectors("MultichainFacet", emptyExclude)
             })
         );
         // Fees Facet
