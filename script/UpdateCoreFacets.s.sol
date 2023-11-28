@@ -27,10 +27,18 @@ contract DeployScript is UpdateScriptBase {
         );
         string memory json = vm.readFile(path);
         address diamondLoupe = json.readAddress(".DiamondLoupeFacet");
-        // address ownership = json.readAddress(".OwnershipFacet");
-        // address withdraw = json.readAddress(".WithdrawFacet");
+        address ownership = json.readAddress(".OwnershipFacet");
+        address withdraw = json.readAddress(".WithdrawFacet");
         address dexMgr = json.readAddress(".DexManagerFacet");
-        // address accessMgr = json.readAddress(".AccessManagerFacet");
+        address accessMgr = json.readAddress(".AccessManagerFacet");
+        address genericCrossSwap = json.readAddress(".GenericCrossChainFacet");
+        address genericSwap = json.readAddress(".GenericSwapFacet");
+        address peripheryRegistry = json.readAddress(".PeripheryRegistryFacet");
+        address transfer = json.readAddress(".TransferFacet");
+        address xy = json.readAddress(".XYFacet");
+        address symbiosis = json.readAddress(".SymbiosisFacet");
+        address stargate = json.readAddress(".StargateFacet");
+        address multichain = json.readAddress(".MultichainFacet");
         address fees = json.readAddress(".FeesFacet");
 
         vm.startBroadcast(deployerPrivateKey);
@@ -48,27 +56,24 @@ contract DeployScript is UpdateScriptBase {
                 )
             })
         );
-        console.log("2");
 
         // Ownership Facet
-        // cut.push(
-        //     IDiamondCut.FacetCut({
-        //         facetAddress: address(ownership),
-        //         action: IDiamondCut.FacetCutAction.Add,
-        //         functionSelectors: getSelectors("OwnershipFacet", emptyExclude)
-        //     })
-        // );
-        // console.log("3");
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(ownership),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("OwnershipFacet", emptyExclude)
+            })
+        );
 
         // Withdraw Facet
-        // cut.push(
-        //     IDiamondCut.FacetCut({
-        //         facetAddress: withdraw,
-        //         action: IDiamondCut.FacetCutAction.Add,
-        //         functionSelectors: getSelectors("WithdrawFacet", emptyExclude)
-        //     })
-        // );
-        // console.log("4");
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: withdraw,
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("WithdrawFacet", emptyExclude)
+            })
+        );
 
         // Dex Manager Facet
         cut.push(
@@ -81,21 +86,96 @@ contract DeployScript is UpdateScriptBase {
                 )
             })
         );
-        console.log("5");
 
         // Access Manager Facet
-        // cut.push(
-        //     IDiamondCut.FacetCut({
-        //         facetAddress: accessMgr,
-        //         action: IDiamondCut.FacetCutAction.Add,
-        //         functionSelectors: getSelectors(
-        //             "AccessManagerFacet",
-        //             emptyExclude
-        //         )
-        //     })
-        // );
-        // console.log("6");
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: accessMgr,
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors(
+                    "AccessManagerFacet",
+                    emptyExclude
+                )
+            })
+        );
 
+        // GenericCrossChain Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(genericCrossSwap),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors(
+                    "GenericCrossChainFacet",
+                    exclude
+                )
+            })
+        );
+
+        // GenericSwap Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(genericSwap),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors(
+                    "GenericSwapFacet",
+                    exclude
+                )
+            })
+        );
+
+        // PeripheryRegistry Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(peripheryRegistry),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("PeripheryRegistryFacet", exclude)
+            })
+        );
+
+        // Transfer Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(transfer),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("TransferFacet", exclude)
+            })
+        );
+
+        // XY Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(xy),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("XYFacet", exclude)
+            })
+        );
+
+        // Symbiosis Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(symbiosis),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("SymbiosisFacet", exclude)
+            })
+        );
+
+        // Stargate Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(stargate),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("StargateFacet", exclude)
+            })
+        );
+
+        // MultiChain Facet
+        cut.push(
+            IDiamondCut.FacetCut({
+                facetAddress: address(multichain),
+                action: IDiamondCut.FacetCutAction.Add,
+                functionSelectors: getSelectors("MultichainFacet", exclude)
+            })
+        );
         // Fees Facet
         cut.push(
             IDiamondCut.FacetCut({
@@ -104,7 +184,6 @@ contract DeployScript is UpdateScriptBase {
                 functionSelectors: getSelectors("FeesFacet", emptyExclude)
             })
         );
-        console.log("7");
 
         cutter.diamondCut(cut, address(0), "");
         facets = loupe.facetAddresses();

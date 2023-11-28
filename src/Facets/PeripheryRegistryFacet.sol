@@ -5,7 +5,7 @@ import { LibDiamond } from "../Libraries/LibDiamond.sol";
 
 /// @title Periphery Registry Facet
 /// @notice A simple registry to track RUBIC periphery contracts
-contract PeripheryRegistryFacet {
+contract PeripheryRegistryFacet {   
     /// Storage ///
     bytes32 internal constant NAMESPACE =
         keccak256("com.rubic.facets.periphery_registry");
