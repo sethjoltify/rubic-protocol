@@ -32,10 +32,6 @@ contract DeployScript is UpdateScriptBase {
         address genericSwap = json.readAddress(".GenericSwapFacet");
         address peripheryRegistry = json.readAddress(".PeripheryRegistryFacet");
         address transfer = json.readAddress(".TransferFacet");
-        address xy = json.readAddress(".XYFacet");
-        address symbiosis = json.readAddress(".SymbiosisFacet");
-        address stargate = json.readAddress(".StargateFacet");
-        address multichain = json.readAddress(".MultichainFacet");
         address fees = json.readAddress(".FeesFacet");
 
         vm.startBroadcast(deployerPrivateKey);
@@ -137,42 +133,6 @@ contract DeployScript is UpdateScriptBase {
                 functionSelectors: getSelectors("TransferFacet", emptyExclude)
             })
         );
-
-        // XY Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(xy),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("XYFacet", emptyExclude)
-            })
-        );
-
-        // Symbiosis Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(symbiosis),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("SymbiosisFacet", emptyExclude)
-            })
-        );
-
-        // Stargate Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(stargate),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("StargateFacet", emptyExclude)
-            })
-        );
-
-        // MultiChain Facet
-        cut.push(
-            IDiamondCut.FacetCut({
-                facetAddress: address(multichain),
-                action: IDiamondCut.FacetCutAction.Add,
-                functionSelectors: getSelectors("MultichainFacet", emptyExclude)
-            })
-        );
         // Fees Facet
         cut.push(
             IDiamondCut.FacetCut({
@@ -182,7 +142,7 @@ contract DeployScript is UpdateScriptBase {
             })
         );
 
-        cutter.diamondCut(cut, address(0), "");
+        // cutter.diamondCut(cut, address(0), "");
         facets = loupe.facetAddresses();
 
         vm.stopBroadcast();
